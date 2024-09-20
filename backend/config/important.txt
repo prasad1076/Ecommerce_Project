@@ -1,0 +1,5 @@
+mongodb credentials :
+ Username : prasadjagtap70
+ Password : wtg4yg5UjUBJBZ3k
+
+ mongodb+srv://prasadjagtap70:wtg4yg5UjUBJBZ3k@ecommerce.4s0kk.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce
