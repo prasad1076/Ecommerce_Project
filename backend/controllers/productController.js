@@ -2,6 +2,7 @@
 const Product = require('../models/productModel');
 const ErrorHandler = require('../utils/errorhandler');
 const catchAsyncError = require('../middleware/catchAsyncError');
+const ApiFeatures = require('../utils/apiFeatures');
 
 //Create Product -- Admin
 exports.createProduct = catchAsyncError(async (req,res,next)=>{
@@ -15,7 +16,8 @@ exports.createProduct = catchAsyncError(async (req,res,next)=>{
 
 // Get ALL Product
 exports.getAllProducts = catchAsyncError(async (req,res,next)=>{
-    const products = await Product.find();
+    const  apiFeature = new ApiFeatures(Product.find(),req.query).search().filter()
+    const products = await apiFeature.query;   //because in apifeature we have made this.query so we can access it there directly
     res.status(200).json({
     success : true,
         message:"All Products Has been Fetched",
