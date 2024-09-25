@@ -14,7 +14,7 @@ exports.createProduct = catchAsyncError(async (req,res,next)=>{
 });
 
 // Get ALL Product
-exports.getAllProducts = catchAsyncError(async (req,res)=>{
+exports.getAllProducts = catchAsyncError(async (req,res,next)=>{
     const products = await Product.find();
     res.status(200).json({
     success : true,
@@ -25,12 +25,15 @@ exports.getAllProducts = catchAsyncError(async (req,res)=>{
 
 
 //get Product Details
-exports.getProductDetails = catchAsyncError(async (req,res)=>{
-    const products = await Product.find();
+exports.getProductDetails = catchAsyncError(async (req,res,next)=>{
+    const product = await Product.findById(req.params.id);
+    if(!product){
+        return next(new ErrorHandler('Product Not Found',404));
+    }
     res.status(200).json({
     success : true,
         message:"All Products Has been Fetched",
-        products
+        product
     })
 });
 
